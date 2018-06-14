@@ -8,20 +8,20 @@ RSpec.feature "StaticPages", type: :feature do
   describe "#home" do
     
     it "should get root" do
-      visit root_url
+      visit root_path
       expect(page).to have_http_status(:success)
     end
     
     it "タイトルが正しいこと" do
-      visit static_pages_home_path
+      visit root_path
       expect(page).to have_http_status(:success)
-      expect(page).to have_title "Home | #{base_title}"
+      expect(page).to have_title "#{base_title}"
     end
   end
   
   describe "#help" do
     it "タイトルが正しいこと" do
-      visit static_pages_help_path
+      visit help_path
       expect(page).to have_http_status(:success)
       expect(page).to have_title "Help | #{base_title}"
     end
@@ -29,7 +29,7 @@ RSpec.feature "StaticPages", type: :feature do
   
   describe "#about" do
     it "タイトルが正しいこと" do
-      visit static_pages_about_path
+      visit about_path
       expect(page).to have_http_status(:success)
       expect(page).to have_title "About | #{base_title}"
     end
@@ -37,7 +37,7 @@ RSpec.feature "StaticPages", type: :feature do
   
   describe "#contact" do
     it "タイトルが正しいこと" do
-      visit static_pages_contact_path
+      visit contact_path
       expect(page).to have_http_status(:success)
       expect(page).to have_title "Contact | #{base_title}"
     end
