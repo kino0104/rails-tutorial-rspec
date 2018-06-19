@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   before do
-    @user = User.new(name: "Example User", email: "user@example.com")
+    @user = User.new(name: "Example User", email: "user@example.com",
+                     password: "foobar", password_confirmation: "foobar")
   end
   
   # userが有効であること
@@ -74,5 +75,19 @@ RSpec.describe User, type: :model do
     @user.email = mixed_case_email
     @user.save
     expect(mixed_case_email.downcase).to eq @user.reload.email 
+  end
+  
+  # パスワードが存在しなければ(ブランクでなければ)無効な状態であること
+  it "is invalid with password blank" do
+    @user.password = @user.password_confirmation = " " * 6
+    @user.valid?
+    expect(@user.errors[:password]).to include("can't be blank")
+  end
+  
+  # パスワードが6文字以上でなければ無効な状態であること
+  it "is invalid unless password length is more than 6 characters" do
+    @user.password = @user.password_confirmation = "a" * 5
+    @user.valid?
+    expect(@user.errors[:password]).to include("is too short (minimum is 6 characters)")
   end
 end
