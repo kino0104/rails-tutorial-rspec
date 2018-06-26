@@ -6,4 +6,11 @@ class User < ApplicationRecord
             format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }
+  
+  # 渡された文字列のハッシュ値を返す
+  def User.digest(string)
+    const =ActiveModel::SecurePassword.min_cost ? 
+      BCrypt::Engine::MIN_COST : BCrypt::Engine.const
+    BCrypt::Password.create(string, cost: cost)
+  end
 end

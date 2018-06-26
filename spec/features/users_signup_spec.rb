@@ -27,8 +27,8 @@ RSpec.feature "Users", type: :feature do
       fill_in "Confirmation", with: "password"
       click_on "Create my account"
       expect(page).to have_css "div.alert-success"
+      expect(current_path).to eq user_path(User.last)
+
     }.to change(User, :count).by(1)
-    
-    
   end
 end
