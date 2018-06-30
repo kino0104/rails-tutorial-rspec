@@ -59,8 +59,18 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 end
-
+# 以下、sessionを使用できないため動かない
 # テストユーザがログイン中の場合にtrueを返す
 #def is_logged_in?
 #  !session[:user_id].nil?
 #end
+
+# テストユーザーとしてログインする
+#def log_in_as(user)
+#  session[:user_id] = user.id
+#end
+
+# CapybaraでCookiesを取得する
+def cookies(key)
+  page.driver.browser.rack_mock_session.cookie_jar[key]
+end

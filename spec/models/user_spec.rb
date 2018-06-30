@@ -90,4 +90,9 @@ RSpec.describe User, type: :model do
     @user.valid?
     expect(@user.errors[:password]).to include("is too short (minimum is 6 characters)")
   end
+  
+  # ダイジェストが存在しない場合のauthenticated?
+  example "authenticated? should return false for a user with nil digest" do
+    expect(@user.authenticated?("")).to be_falsy
+  end
 end
