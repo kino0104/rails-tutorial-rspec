@@ -66,11 +66,13 @@ end
 #end
 
 # テストユーザーとしてログインする
-#def log_in_as(user)
-#  session[:user_id] = user.id
-#end
+def log_in_as(user)
+  session[:user_id] = user.id
+end
+
 
 # CapybaraでCookiesを取得する
 def cookies(key)
   page.driver.browser.rack_mock_session.cookie_jar[key]
 end
+

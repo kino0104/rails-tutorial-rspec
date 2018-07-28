@@ -10,7 +10,7 @@ RSpec.feature "Users", type: :feature do
       fill_in "Name", with: ""
       fill_in "Email", with: "user@invalid"
       fill_in "Password", with: "foo"
-      fill_in "Confirmation", with: "bar"
+      fill_in "Password confirmation", with: "bar"
       click_on "Create my account"
       
       expect(page).to have_css "div#error_explanation"
@@ -24,7 +24,7 @@ RSpec.feature "Users", type: :feature do
       fill_in "Name", with: "Example User"
       fill_in "Email", with: "user@example.com"
       fill_in "Password", with: "password"
-      fill_in "Confirmation", with: "password"
+      fill_in "Password confirmation", with: "password"
       click_on "Create my account"
       expect(page).to have_css "div.alert-success"
       expect(current_path).to eq user_path(User.last)
